@@ -1,0 +1,24 @@
+type User @key(fields: "id") {
+  id: ID!
+  name: String!
+  email: String!
+  orders: [Order]
+}
+
+type Product @key(fields: "id") {
+  id: ID!
+  name: String!
+  price: Float!
+}
+
+type Order {
+  id: ID!
+  product: Product
+  user: User
+  quantity: Int!
+}
+
+extend type Query {
+  orders: [Order]
+  order(id: ID!): Order 
+}
