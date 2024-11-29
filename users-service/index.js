@@ -16,6 +16,11 @@ const resolvers = {
       return users.find((user) => user.id === id);
     },
   },
+    User: {
+    __resolveReference: (reference) => {
+      return users.find((user) => user.id === reference.id);
+    },
+  },
 };
 
 const server = new ApolloServer({

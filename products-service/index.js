@@ -15,6 +15,11 @@ const resolvers = {
       return products.find((product) => product.id === id);
     },
   },
+  Product: {
+    __resolveReference: (reference) => {
+      return products.find((product) => product.id === reference.id);
+    },
+  },
 };
 
 const server = new ApolloServer({

@@ -10,16 +10,6 @@ const orders = [
   { id: "2", product: { id: "2" }, user: { id: "2" }, quantity: 1 },
 ];
 
-const products = [
-  { id: "1", name: "Laptop", price: 999.99 },
-  { id: "2", name: "Phone", price: 499.99 },
-];
-
-const users = [
-  { id: "1", name: "Alice", email: "alice@example.com" },
-  { id: "2", name: "John", email: "john@example.com" },
-];
-
 const resolvers = {
   Query: {
     orders: () => orders,
@@ -37,13 +27,14 @@ const resolvers = {
   },
   
   Order: {
-    product: (order) => {
-      return products.find((product) => product.id === order.product.id);
-    },
-    
-    user: (order) => {
-      return users.find((user) => user.id === order.user.id);
-    },
+    product: (order) => ({
+      __typename: "User",
+      id: order.product.id,
+    }),
+    user: (order) => ({
+      __typename: "User",
+      id: order.user.id,
+    }),
   },
 };
 
